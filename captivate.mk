@@ -41,26 +41,22 @@
 DEVICE_PACKAGE_OVERLAYS := device/samsung/captivate/overlay
 
 # These are the hardware-specific configuration files
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES = \
 	device/samsung/captivate/vold.fstab:system/etc/vold.fstab \
 	device/samsung/captivate/egl.cfg:system/lib/egl/egl.cfg
 
 # Init files
 PRODUCT_COPY_FILES += \
+	device/samsung/captivate/init.rc:root/init.rc \
 	device/samsung/captivate/init.aries.rc:root/init.aries.rc \
 	device/samsung/captivate/ueventd.aries.rc:root/ueventd.aries.rc \
-        device/samsung/captivate/recovery.rc:root/recovery.rc
-
-# Recovery Files
-PRODUCT_COPY_FILES += \
-	device/samsung/captivate/init.aries.rc:recovery/root/init.aries.rc \
-	device/samsung/captivate/ueventd.aries.rc:recovery/root/ueventd.aries.rc \
-        device/samsung/captivate/recovery.rc:recovery/root/recovery.rc
+	device/samsung/captivate/setupenv.sh:recovery/root/sbin/setupenv.sh
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/captivate/cypress-touchkey.kl:system/usr/keylayout/cypress-touchkey.kl \
 	device/samsung/captivate/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+	device/samsung/captivate/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
 	device/samsung/captivate/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
 
 # Generated kcm keymaps
@@ -75,30 +71,27 @@ PRODUCT_PACKAGES += \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-	device/samsung/common/aries/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
 	device/samsung/captivate/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
-	libSEC_OMX_Core \
-	libOMX.SEC.AVC.Decoder \
-	libOMX.SEC.M4V.Decoder \
-	libOMX.SEC.M4V.Encoder \
-	libOMX.SEC.AVC.Encoder
+	libSEC_OMX_Core.aries \
+	libOMX.SEC.AVC.Decoder.aries \
+	libOMX.SEC.M4V.Decoder.aries \
+	libOMX.SEC.M4V.Encoder.aries \
+	libOMX.SEC.AVC.Encoder.aries
 
 # Misc other modules
 PRODUCT_PACKAGES += \
-	lights.s5pv210 \
-	overlay.s5pv210 \
+	lights.aries \
+	overlay.aries \
 	sensors.aries
+
 # Libs
 PRODUCT_PACKAGES += \
 	libcamera \
 	libstagefrighthw
-
-# Input device calibration files
-PRODUCT_COPY_FILES += \
-	device/samsung/captivate/mxt224_ts_input.idc:system/usr/idc/mxt224_ts_input.idc
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -129,7 +122,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=eth0 \
-       wifi.supplicant_scan_interval=15 \
+       wifi.supplicant_scan_interval=20 \
        dalvik.vm.heapsize=32m
 
 # enable Google-specific location features,
@@ -137,6 +130,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.com.google.locationfeatures=1 \
         ro.com.google.networklocation=1
+
+# Extended JNI checks
+# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
+# before they have a chance to cause problems.
+# Default=true for development builds, set by android buildsystem.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.kernel.android.checkjni=0 \
+    dalvik.vm.checkjni=false
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -149,24 +150,21 @@ PRODUCT_LOCALES := hdpi
 
 # kernel modules
 PRODUCT_COPY_FILES += \
-	device/samsung/captivate/bcm4329.ko:system/modules/bcm4329.ko \
-	device/samsung/captivate/cifs.ko:system/modules/cifs.ko \
-	device/samsung/captivate/tun.ko:system/modules/tun.ko
+	device/samsung/captivate/bcm4329.ko:system/lib/modules/bcm4329.ko \
+	device/samsung/captivate/cifs.ko:system/lib/modules/cifs.ko \
+	device/samsung/captivate/tun.ko:system/lib/modules/tun.ko
 
-ifeq ($(TARGET_PREBUILT_ZIMAGE),)
-LOCAL_ZIMAGE := device/samsung/captivate/zImage
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+	LOCAL_KERNEL := device/samsung/captivate/kernel
 else
-LOCAL_ZIMAGE := $(TARGET_PREBUILT_ZIMAGE)
+	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_ZIMAGE):zImage
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_ZIMAGE):kernel
+	$(LOCAL_KERNEL):kernel
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product-if-exists, vendor/samsung/common/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/captivate/captivate-vendor.mk)
