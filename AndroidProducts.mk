@@ -26,4 +26,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_captivate.mk
+    $(LOCAL_DIR)/full_captivatemtd.mk

@@ -23,15 +23,15 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # This is where we'd set a backup provider if we had one
 #$(call inherit-product, device/sample/products/backup_overlay.mk)
-$(call inherit-product, device/samsung/captivate/captivate.mk)
+$(call inherit-product, device/samsung/captivatemtd/captivatemtd.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 
 # Captivate uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := full_captivate
-PRODUCT_DEVICE := captivate
-PRODUCT_BRAND := Samsung
-PRODUCT_MANUFACTURER := Samsung
+PRODUCT_NAME := full_captivatemtd
+PRODUCT_DEVICE := captivatemtd
+PRODUCT_BRAND := samsung
+PRODUCT_MANUFACTURER := samsung
 PRODUCT_MODEL := SGH-I897

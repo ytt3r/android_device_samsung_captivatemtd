@@ -16,12 +16,12 @@
 
 import sys
 import os
-import captivate_common as common
+import captivatemtd_common as common
 
 LOCAL_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 RELEASETOOLS_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../build/tools/releasetools'))
-TARGET_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../out/target/product/captivate'))
-UTILITIES_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../out/target/product/captivate/utilities'))
+TARGET_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../out/target/product/captivatemtd'))
+UTILITIES_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../out/target/product/captivatemtd/utilities'))
 
 # Add releasetools directory to python path
 sys.path.append(RELEASETOOLS_DIR)

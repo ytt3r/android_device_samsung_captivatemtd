@@ -38,26 +38,26 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS := device/samsung/captivate/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/captivatemtd/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES = \
-	device/samsung/captivate/vold.fstab:system/etc/vold.fstab \
-	device/samsung/captivate/egl.cfg:system/lib/egl/egl.cfg
+	device/samsung/captivatemtd/vold.fstab:system/etc/vold.fstab \
+	device/samsung/captivatemtd/egl.cfg:system/lib/egl/egl.cfg
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/captivate/init.rc:root/init.rc \
-	device/samsung/captivate/init.aries.rc:root/init.aries.rc \
-	device/samsung/captivate/ueventd.aries.rc:root/ueventd.aries.rc \
-	device/samsung/captivate/setupenv.sh:recovery/root/sbin/setupenv.sh
+	device/samsung/captivatemtd/init.rc:root/init.rc \
+	device/samsung/captivatemtd/init.aries.rc:root/init.aries.rc \
+	device/samsung/captivatemtd/ueventd.aries.rc:root/ueventd.aries.rc \
+	device/samsung/captivatemtd/setupenv.sh:recovery/root/sbin/setupenv.sh
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/captivate/cypress-touchkey.kl:system/usr/keylayout/cypress-touchkey.kl \
-	device/samsung/captivate/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	device/samsung/captivate/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
-	device/samsung/captivate/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
+	device/samsung/captivatemtd/cypress-touchkey.kl:system/usr/keylayout/cypress-touchkey.kl \
+	device/samsung/captivatemtd/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+	device/samsung/captivatemtd/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
+	device/samsung/captivatemtd/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
@@ -72,7 +72,7 @@ PRODUCT_PACKAGES += \
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
 	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
-	device/samsung/captivate/media_profiles.xml:system/etc/media_profiles.xml
+	device/samsung/captivatemtd/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
@@ -150,12 +150,12 @@ PRODUCT_LOCALES := hdpi
 
 # kernel modules
 PRODUCT_COPY_FILES += \
-	device/samsung/captivate/bcm4329.ko:system/lib/modules/bcm4329.ko \
-	device/samsung/captivate/cifs.ko:system/lib/modules/cifs.ko \
-	device/samsung/captivate/tun.ko:system/lib/modules/tun.ko
+	device/samsung/captivatemtd/bcm4329.ko:system/lib/modules/bcm4329.ko \
+	device/samsung/captivatemtd/cifs.ko:system/lib/modules/cifs.ko \
+	device/samsung/captivatemtd/tun.ko:system/lib/modules/tun.ko
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/samsung/captivate/kernel
+	LOCAL_KERNEL := device/samsung/captivatemtd/kernel
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -167,4 +167,4 @@ PRODUCT_COPY_FILES += \
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product-if-exists, vendor/samsung/captivate/captivate-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/captivatemtd/captivate-vendor.mk)
