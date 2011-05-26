@@ -38,26 +38,26 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS := device/samsung/captivatemtd/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/aries-common/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES = \
-	device/samsung/captivatemtd/vold.fstab:system/etc/vold.fstab \
-	device/samsung/captivatemtd/egl.cfg:system/lib/egl/egl.cfg
+	device/samsung/aries-common/vold.fstab:system/etc/vold.fstab \
+	device/samsung/aries-common/egl.cfg:system/lib/egl/egl.cfg
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/captivatemtd/init.rc:root/init.rc \
-	device/samsung/captivatemtd/init.aries.rc:root/init.aries.rc \
-	device/samsung/captivatemtd/ueventd.aries.rc:root/ueventd.aries.rc \
-	device/samsung/captivatemtd/setupenv.sh:recovery/root/sbin/setupenv.sh
+	device/samsung/aries-common/init.rc:root/init.rc \
+	device/samsung/aries-common/init.aries.rc:root/init.aries.rc \
+	device/samsung/aries-common/ueventd.aries.rc:root/ueventd.aries.rc \
+	device/samsung/aries-common/setupenv.sh:recovery/root/sbin/setupenv.sh
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/captivatemtd/cypress-touchkey.kl:system/usr/keylayout/cypress-touchkey.kl \
-	device/samsung/captivatemtd/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+	device/samsung/aries-common/cypress-touchkey.kl:system/usr/keylayout/cypress-touchkey.kl \
+	device/samsung/aries-common/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
 	device/samsung/captivatemtd/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
-	device/samsung/captivatemtd/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
+	device/samsung/aries-common/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
@@ -72,7 +72,7 @@ PRODUCT_PACKAGES += \
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
 	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
-	device/samsung/captivatemtd/media_profiles.xml:system/etc/media_profiles.xml
+	device/samsung/aries-common/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
