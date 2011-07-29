@@ -156,10 +156,9 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_LOCALES := hdpi
 
 # kernel modules
-PRODUCT_COPY_FILES += \
-	device/samsung/captivatemtd/bcm4329.ko:system/lib/modules/bcm4329.ko \
-	device/samsung/captivatemtd/cifs.ko:system/lib/modules/cifs.ko \
-	device/samsung/captivatemtd/tun.ko:system/lib/modules/tun.ko
+PRODUCT_COPY_FILES += $(foreach module,\
+	$(wildcard device/samsung/captivatemtd/*.ko),\
+	$(module):system/lib/modules/$(notdir $(module)))
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := device/samsung/captivatemtd/kernel
